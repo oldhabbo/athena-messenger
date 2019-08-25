@@ -1,0 +1,34 @@
+syntax = "proto3";
+package messenger;
+
+// Partitioned by shard key
+service Messenger {
+}
+
+// Partitioned by User UUID
+service FriendList {
+  rpc Init(InitRequest) returns (InitResponse) {} // FRIENDLIST_INIT, 12
+  rpc Update(UpdateRequest) returns (UpdateResponse) {} // FRIENDLIST_UPDATE, 15
+
+  rpc RemoveFriend(RemoveFriendRequest) returns (RemoveFriendResponse) {} // FRIENDLIST_REMOVEFRIEND, 40
+  // Sent when link in promotional/"official" console messages from staff is clicked
+  rpc Clicked(ClickedRequest) returns (ClickedResponse) {} // MESSENGER_C_CLICK, 30
+
+  // Unsure what this is, needs testing
+  rpc Read(ReadRequest) returns (ReadResponse) {} // MESSENGER_C_READ, 31
+
+  rpc MarkRead(MarkRequest) returns (MarkResponse) {} // MESSENGER_MARKREAD, 32
+  rpc Chat(ChatRequest) returns (ChatResponse) {} // MESSENGER_SENDMSG, 33
+
+  rpc AssignPersistentMsg(PersistentMsgReq) returns (PersistentMsgRes) {} // MESSENGER_ASSIGNPERSMSG, 36
+  rpc AcceptBuddy(AcceptRequest) returns (AcceptResponse) {} // MESSENGER_ACCEPTBUDDY, 37
+  rpc DeclineBuddy(DeclineRequest) returns (DeclineResponse) {} // MESSENGER_DECLINEBUDDY, 38
+  rpc RequestBuddy(NewBuddyRequest) returns (NewBuddyResponse) {} // MESSENGER_REQUESTBUDDY, 39
+  rpc RemoveBuddy(RemoveRequest) returns (RemoveResponse) {} // MESSENGER_REMOVEBUDDY, 40
+  rpc FindUser(SearchRequest) returns (SearchResponse) {} // FINDUSER, 41
+  rpc AskForMessages(MoreMsgsRequest) returns (MoreMsgsResponse) {} // MESSENGER_GETMESSAGES, 191
+  rpc ReportMessage(ReportRequest) returns (ReportResponse) {} // MESSENGER_REPORTMESSAGE, 201
+  rpc AskForBuddies(MoreBuddiesRequest) returns (MoreBuddiesResponse) {} // GET_BUDDY_REQUESTS, 233
+  rpc FollowBuddy(FollowRequest) returns (FollowResponse) {} // FOLLOW_FRIEND, 262
+  rpc InviteBuddy(InviteRequest) returns (InviteResponse) {} // FRIEND_INVITE, 34
+}
